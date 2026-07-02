@@ -1,14 +1,7 @@
-import { headers } from "next/headers";
+import { getHelloMessage } from "@/lib/hello";
 
 export default async function Home() {
-  const headersList = await headers();
-  const host = headersList.get("host") || "localhost:3000";
-  const protocol = headersList.get("x-forwarded-proto") || "http";
-
-  const res = await fetch(`${protocol}://${host}/api/hello`, {
-    cache: "no-store",
-  });
-  const data = await res.json();
+  const data = getHelloMessage();
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black w-full">
