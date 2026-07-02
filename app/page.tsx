@@ -1,11 +1,7 @@
-import { headers } from "next/headers";
-
 export default async function Home() {
-  const headersList = await headers();
-  const host = headersList.get("host") || "localhost:3000";
-  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-  const res = await fetch(`${protocol}://${host}/api/hello`, {
+  const res = await fetch(`${baseUrl}/api/hello`, {
     cache: "no-store",
   });
   const data = await res.json();
